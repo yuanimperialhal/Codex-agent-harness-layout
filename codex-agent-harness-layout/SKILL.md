@@ -1,6 +1,6 @@
 ---
 name: codex-agent-harness-layout
-description: Create or maintain a Codex-style multi-agent harness layout for a project. Use when the user asks to generate, install, enforce, update, or reuse Agent.md, AGENTS.md, .codex/config.toml, .codex/agents/*.toml, every_tasks_harness/*.md, or a planer/explorer/implementer/reviewer/tester/verifier workflow with a feedback repair loop. Keeps business code unchanged unless explicitly requested, uses reviewer as the review role name, and adds robot or hardware safety rules when a project involves chassis, motors, navigation, ROS, TCP robot control, or real devices.
+description: Create or maintain a Codex-style multi-agent harness layout for a project. Use when the user asks to generate, install, enforce, update, or reuse Agent.md, AGENTS.md, .codex/config.toml, .codex/agents/*.toml, every_tasks_harness/*.md, or a planner/explorer/implementer/reviewer/tester/verifier workflow with a feedback repair loop. Keeps business code unchanged unless explicitly requested, uses planner as the planning role name, uses reviewer as the review role name, and adds robot or hardware safety rules when a project involves chassis, motors, navigation, ROS, TCP robot control, or real devices.
 ---
 
 # Codex Agent Harness Layout
@@ -10,7 +10,7 @@ description: Create or maintain a Codex-style multi-agent harness layout for a p
 Create a reusable project-local harness that makes Codex follow this initial role order:
 
 ```text
-planer -> explorer -> implementer -> reviewer -> tester -> verifier
+planner -> explorer -> implementer -> reviewer -> tester -> verifier
 ```
 
 The harness is a control layer for agent behavior. It should not change business code, robot-control code, application code, tests, or runtime configuration unless the user explicitly asks for those changes.
@@ -25,13 +25,13 @@ Create or maintain these files at the target project root:
 AGENTS.md
 Agent.md
 .codex/config.toml
-.codex/agents/planer.toml
+.codex/agents/planner.toml
 .codex/agents/explorer.toml
 .codex/agents/implementer.toml
 .codex/agents/reviewer.toml
 .codex/agents/tester.toml
 .codex/agents/verifier.toml
-every_tasks_harness/planer.md
+every_tasks_harness/planner.md
 every_tasks_harness/explorer.md
 every_tasks_harness/implementer.md
 every_tasks_harness/reviewer.md
@@ -60,7 +60,7 @@ Keep the role names exactly as listed. Use `reviewer` exactly for the review rol
 
 4. Keep implementation conservative.
    - Only `implementer` should default to write-capable behavior.
-   - `planer`, `explorer`, `reviewer`, `tester`, and `verifier` default to read-only behavior.
+   - `planner`, `explorer`, `reviewer`, `tester`, and `verifier` default to read-only behavior.
    - If Codex has no actual subagent execution tool in the current environment, instruct the main agent to simulate the same sequence in one thread and record each role's output clearly.
 
 5. Use the repair loop whenever quality gates find issues.
@@ -96,7 +96,7 @@ Use these role defaults:
 
 | File | name | sandbox_mode | model_reasoning_effort |
 | --- | --- | --- | --- |
-| `.codex/agents/planer.toml` | `planer` | `read-only` | `high` |
+| `.codex/agents/planner.toml` | `planner` | `read-only` | `high` |
 | `.codex/agents/explorer.toml` | `explorer` | `read-only` | `medium` |
 | `.codex/agents/implementer.toml` | `implementer` | `workspace-write` | `high` |
 | `.codex/agents/reviewer.toml` | `reviewer` | `read-only` | `high` |
@@ -111,7 +111,7 @@ Add a compact `AGENTS.md` section, merging with existing content if needed. The 
 
 - The project must use the repository-local Codex harness workflow.
 - Before code edits, debugging, testing, or documentation tasks, Codex must read `Agent.md`, `.codex/config.toml`, `.codex/agents/*.toml`, and `every_tasks_harness/*.md`.
-- The required order is `planer -> explorer -> implementer -> reviewer -> tester -> verifier`.
+- The required order is `planner -> explorer -> implementer -> reviewer -> tester -> verifier`.
 - Codex must not skip `Agent.md`.
 - Codex must not create a different harness, role order, or directory layout.
 - Codex must use `reviewer` as the review role name.
@@ -132,7 +132,7 @@ For robot, chassis, motor, navigation, ROS, TCP-control, or real-hardware projec
 
 Each file under `every_tasks_harness/` must be Chinese-first and must include these concepts:
 
-- `planer.md`: clarify goal, scope, risk, role sequence, file boundaries, and acceptance criteria before exploration or edits.
+- `planner.md`: clarify goal, scope, risk, role sequence, file boundaries, and acceptance criteria before exploration or edits.
 - `explorer.md`: inspect real repo state, identify entry points and tests, collect evidence, and avoid modifications.
 - `implementer.md`: make only task-scoped edits, preserve unrelated user changes, record changed files, fix in-scope issues assigned by the main agent, and keep robot actions simulated unless explicitly authorized.
 - `reviewer.md`: review for bugs, safety issues, behavioral regressions, missing tests, and harness-rule violations; report findings to the main agent without editing files.
@@ -158,7 +158,7 @@ The output format for each role should be short Chinese markdown with evidence, 
 `Agent.md` must be the main orchestration document. It should state:
 
 - The main agent is the coordinator.
-- The required order is `planer -> explorer -> implementer -> reviewer -> tester -> verifier`.
+- The required order is `planner -> explorer -> implementer -> reviewer -> tester -> verifier`.
 - Each role must read its own `every_tasks_harness/<role>.md`.
 - Only `implementer` may make task-scoped file edits by default.
 - `reviewer`, `tester`, and `verifier` must report risks to the main agent and must not edit files.

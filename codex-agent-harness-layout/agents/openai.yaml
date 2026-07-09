@@ -1,7 +1,7 @@
 interface:
   display_name: "Codex Agent Harness Layout"
   short_description: "Generate Codex agent harness files."
-  default_prompt: "Use $codex-agent-harness-layout to generate or maintain this project's Codex multi-agent harness with reviewer/tester/verifier reporting issues back to implementer through the main agent."
+  default_prompt: "Use $codex-agent-harness-layout to generate or maintain this project's planner/explorer/implementer/reviewer/tester/verifier harness with quality gates reporting issues back through the main agent."
 
 policy:
   allow_implicit_invocation: true
