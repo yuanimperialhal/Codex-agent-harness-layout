@@ -1,0 +1,25 @@
+{
+  "name": "codex-agent-harness-layout",
+  "version": "0.1.0",
+  "description": "Create and maintain a reusable Codex multi-agent harness layout.",
+  "author": {
+    "name": "yuanimperialhal",
+    "url": "https://github.com/yuanimperialhal"
+  },
+  "homepage": "https://github.com/yuanimperialhal/Codex-agent-harness-layout",
+  "repository": "https://github.com/yuanimperialhal/Codex-agent-harness-layout",
+  "keywords": ["codex", "agents", "harness", "workflow"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Agent Harness Layout",
+    "shortDescription": "Create a reusable Codex multi-agent harness.",
+    "longDescription": "Create and maintain planner, explorer, implementer, reviewer, tester, and verifier workflows for Codex projects.",
+    "developerName": "yuanimperialhal",
+    "category": "Productivity",
+    "capabilities": ["Write"],
+    "websiteURL": "https://github.com/yuanimperialhal/Codex-agent-harness-layout",
+    "defaultPrompt": [
+      "Create a Codex multi-agent harness for this project."
+    ]
+  }
+}
